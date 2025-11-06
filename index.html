@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Was ist Das</title>
-</head>
-<body>  
-    <h1>Willkommen zu "Was ist Das"</h1>
-    <p>Dies ist eine einfache HTML-Seite, die als Ausgangspunkt für Ihr Projekt dient.</p>
-    
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>High-Speed Bumper — 2D Platformer</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="ui">
+            <h1>High-Speed Bumper</h1>
+            <p>Move fast, bump into boxes and throw them off the screen — they explode!</p>
+            <p class="controls">Controls: A / D or ← / → to move, Space to jump, Shift to dash</p>
+            <div class="status">
+                <span id="fps">FPS: --</span>
+                <span id="objects">Objects: --</span>
+            </div>
+                <div class="audio-ui">
+                    <!-- inputs kept but visible text hidden to declutter the game screen -->
+                    <label title="Impact sound"><input id="impactFile" type="file" accept="audio/*"></label>
+                    <label title="Explosion sound"><input id="explosionFile" type="file" accept="audio/*"></label>
+                    <label><input id="useSamples" type="checkbox"> Use uploaded samples when available</label>
+                </div>
+        </div>
+
+        <canvas id="game"></canvas>
+
+        <script src="main.js"></script>
+    </body>
 </html>
