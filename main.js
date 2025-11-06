@@ -40,6 +40,13 @@
   const WORLD_CHUNK = 1200; // generate in chunks
   let worldEndX = 0; // farthest x we've generated
 
+  // background image (optional) - will replace solid color when present
+  let bgImg = new Image();
+  let bgLoaded = false;
+  bgImg.onload = () => { bgLoaded = true; console.log('Background image loaded'); };
+  bgImg.onerror = () => { bgLoaded = false; console.warn('Background image not found: Employment-Job-Application.png'); };
+  bgImg.src = 'Employment-Job-Application.png';
+
   // Audio helper (lazy-created to respect user gesture/autoplay policies)
   let audioCtx = null;
   function getAudioCtx() {
@@ -562,6 +569,31 @@
     window.addEventListener('pointerdown', unlockAudioOnGesture, { once: true });
     window.addEventListener('keydown', unlockAudioOnGesture, { once: true });
     window.addEventListener('touchstart', unlockAudioOnGesture, { once: true });
+    // Mobile touch control bindings (buttons added in index.html)
+    function bindTouchButton(btnId, keyNames) {
+      const el = document.getElementById(btnId);
+      if (!el) return;
+      const active = new Set();
+      el.addEventListener('touchstart', (ev) => {
+        ev.preventDefault();
+        for (const t of ev.changedTouches) active.add(t.identifier);
+        for (const k of keyNames) keys[k] = true;
+      }, { passive: false });
+      el.addEventListener('touchend', (ev) => {
+        ev.preventDefault();
+        for (const t of ev.changedTouches) active.delete(t.identifier);
+        if (active.size === 0) for (const k of keyNames) keys[k] = false;
+      }, { passive: false });
+      el.addEventListener('touchcancel', (ev) => {
+        ev.preventDefault();
+        active.clear();
+        for (const k of keyNames) keys[k] = false;
+      }, { passive: false });
+    }
+    bindTouchButton('touchLeft', ['a', 'arrowleft']);
+    bindTouchButton('touchRight', ['d', 'arrowright']);
+    bindTouchButton('touchJump', [' ', 'arrowup', 'space']);
+    bindTouchButton('touchDash', ['shift']);
   });
 
   // If a project file named "game scream.mp3" exists next to the page, try to load it and enable samples.
@@ -1018,9 +1050,13 @@
   function render() {
     ctx.clearRect(0, 0, W, H);
 
-    // background (parallax)
-    ctx.fillStyle = '#0b0f1a';
-    ctx.fillRect(0, 0, W, H);
+    // background (parallax) - draw image if available, otherwise fallback color
+    if (bgLoaded) {
+      try { ctx.drawImage(bgImg, 0, 0, W, H); } catch (e) { ctx.fillStyle = '#0b0f1a'; ctx.fillRect(0, 0, W, H); }
+    } else {
+      ctx.fillStyle = '#0b0f1a';
+      ctx.fillRect(0, 0, W, H);
+    }
 
     // world -> translate by camera
   ctx.save();

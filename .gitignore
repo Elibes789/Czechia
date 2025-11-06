@@ -1,0 +1,18 @@
+# Common OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node / Python env
+node_modules/
+venv/
+.env
+
+# Media large files
+*.mp3
+*.wav
+*.ogg
+
+# OneDrive and temporary
+~$*

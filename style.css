@@ -19,4 +19,18 @@ html,body{height:100%;margin:0;font-family:Segoe UI, Roboto, Arial, sans-serif;b
   #game{margin-top:120px}
 }
 
+/* Mobile touch controls */
+.touch-controls{position:fixed;left:12px;right:12px;bottom:12px;pointer-events:none;z-index:20}
+.touch-controls .left-pad, .touch-controls .right-pad{display:inline-block;pointer-events:auto}
+.touch-controls .left-pad{float:left}
+.touch-controls .right-pad{float:right}
+.touch-btn{width:68px;height:68px;border-radius:50%;border:0;background:rgba(255,255,255,0.06);color:#cfe;font-size:22px;margin:6px;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+.touch-btn:active{background:rgba(255,255,255,0.12)}
+.touch-jump{width:86px;height:86px;font-size:28px}
+.touch-dash{width:68px;height:44px;border-radius:12px}
+
+@media (min-width:801px){
+  .touch-controls{display:none}
+}
+
 .ui, .status{user-select:none}
