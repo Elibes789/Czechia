@@ -1,36 +1,41 @@
-/* style.css - simple styling for the platformer */
-html,body{height:100%;margin:0;font-family:Segoe UI, Roboto, Arial, sans-serif;background:#08101a;color:#fff}
-.ui{position:fixed;left:12px;top:12px;z-index:10}
-.ui h1{margin:0 0 6px 0;font-size:18px}
-.ui p{margin:2px 0;color:#bcd}
-.controls{color:#9fb}
-.status{margin-top:6px;font-size:13px;color:#dfd}
-.audio-ui{margin-top:8px;font-size:13px;color:#cfe}
-.audio-ui label{display:inline-block;margin-top:4px;margin-right:8px;padding:4px 6px;border-radius:6px;background:rgba(255,255,255,0.02);cursor:pointer;position:relative;vertical-align:middle}
-/* visually hide the native file chooser text but keep the input clickable
-  we show a small icon via ::after so the UI is compact and non-distracting */
-.audio-ui label::after{content:'🎵';font-size:14px;color:#cfe;display:inline-block}
-.audio-ui input[type=file]{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;cursor:pointer}
-#impactFile, #explosionFile{display:inline-block}
-#game{display:block;margin:80px auto 24px auto;border:2px solid rgba(255,255,255,0.06);box-shadow:0 8px 40px rgba(0,0,0,0.6);background:#061018}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Segoe UI',sans-serif;background:#050910;color:#f4f6ff;min-height:100vh}
+body{display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 
-@media (max-width:800px){
-  .ui{left:8px;top:6px}
-  #game{margin-top:120px}
+.blank{flex:1;display:flex;align-items:center;justify-content:center}
+.blank h1{margin:0;font-size:clamp(3rem,8vw,6.5rem);letter-spacing:.18em;text-transform:uppercase;color:#ff4d8d;text-align:center;text-shadow:0 8px 40px rgba(255,77,141,.45)}
+
+.content{max-width:900px;margin:0 auto;padding:64px 20px;text-align:center}
+
+.hero h1{font-size:3rem;margin-bottom:12px;text-shadow:0 10px 40px rgba(255,64,129,.35)}
+.hero p{font-size:1.2rem;color:#c9d3ff;margin-bottom:48px}
+
+.cta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px;margin-bottom:60px}
+.cta-card{background:rgba(19,26,46,.85);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px;box-shadow:0 24px 60px rgba(8,12,24,.6);display:flex;flex-direction:column;align-items:center;gap:20px}
+.cta-card img{width:100%;border-radius:12px;object-fit:cover;max-height:220px}
+.cta-button{padding:16px 24px;font-size:1rem;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(135deg,#ff4d8d,#ff9a62);color:#fff;font-weight:600;box-shadow:0 12px 32px rgba(255,77,141,.45);transition:transform .15s ease}
+.cta-button:hover{transform:translateY(-2px)}
+.cta-button:active{transform:scale(.96)}
+
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.gallery img{width:100%;border-radius:14px;border:2px solid rgba(255,255,255,.05);object-fit:cover;min-height:140px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+
+.popup{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999}
+.popup-inner{pointer-events:auto;background:rgba(16,22,38,.95);border:3px solid #ff4d8d;border-radius:16px;padding:28px;max-width:340px;width:88%;color:#fff;box-shadow:0 32px 90px rgba(0,0,0,.78);position:absolute;animation:popIn .28s ease}
+.popup-inner.mania{border-color:#ffd200;background:rgba(26,18,6,.96);box-shadow:0 40px 110px rgba(255,166,0,.55)}
+.popup-inner.mania h2{color:#ffd200;text-shadow:0 0 14px rgba(255,210,0,.75)}
+.popup-inner.mania p{color:#ffbd5a}
+.popup-inner h2{margin:0 0 12px;font-size:1.4rem}
+.popup-inner p{margin:0 0 16px;color:#ffd9f0}
+.popup-img{width:100%;border-radius:12px;object-fit:cover;max-height:240px}
+.popup .close{position:absolute;top:8px;right:10px;background:transparent;border:none;color:#fff;font-size:1.4rem;cursor:pointer}
+.popup-consent{display:flex;align-items:center;gap:10px;font-size:.9rem;margin-bottom:16px;color:#ffc9ee}
+.popup-checkbox{accent-color:#ff4d8d;width:18px;height:18px;cursor:pointer}
+
+@keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+
+@media(max-width:680px){
+  .content{padding-top:48px}
+  .hero h1{font-size:2.2rem}
+  .hero p{font-size:1rem}
 }
-
-/* Mobile touch controls */
-.touch-controls{position:fixed;left:12px;right:12px;bottom:12px;pointer-events:none;z-index:20}
-.touch-controls .left-pad, .touch-controls .right-pad{display:inline-block;pointer-events:auto}
-.touch-controls .left-pad{float:left}
-.touch-controls .right-pad{float:right}
-.touch-btn{width:68px;height:68px;border-radius:50%;border:0;background:rgba(255,255,255,0.06);color:#cfe;font-size:22px;margin:6px;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
-.touch-btn:active{background:rgba(255,255,255,0.12)}
-.touch-jump{width:86px;height:86px;font-size:28px}
-.touch-dash{width:68px;height:44px;border-radius:12px}
-
-@media (min-width:801px){
-  .touch-controls{display:none}
-}
-
-.ui, .status{user-select:none}

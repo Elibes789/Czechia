@@ -3,39 +3,28 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>High-Speed Bumper — 2D Platformer</title>
+        <title>This Is Totally Worth It</title>
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <div class="ui">
-            <h1>High-Speed Bumper</h1>
-            <p>Move fast, bump into boxes and throw them off the screen — they explode!</p>
-            <p class="controls">Controls: A / D or ← / → to move, Space to jump, Shift to dash</p>
-            <div class="status">
-                <span id="fps">FPS: --</span>
-                <span id="objects">Objects: --</span>
-            </div>
-                <div class="audio-ui">
-                    <!-- inputs kept but visible text hidden to declutter the game screen -->
-                    <label title="Impact sound"><input id="impactFile" type="file" accept="audio/*"></label>
-                    <label title="Explosion sound"><input id="explosionFile" type="file" accept="audio/*"></label>
-                    <label><input id="useSamples" type="checkbox"> Use uploaded samples when available</label>
+        <main class="blank">
+            <h1>fuck ai</h1>
+        </main>
+
+        <template id="popup-template">
+            <div class="popup">
+                <div class="popup-inner">
+                    <button class="close" aria-label="Close">×</button>
+                    <h2 data-title></h2>
+                    <p data-subtitle></p>
+                    <label class="popup-consent">
+                        <input type="checkbox" class="popup-checkbox" />
+                        <span data-consent-text>I agree this is totally worth it.</span>
+                    </label>
+                    <img class="popup-img" alt="Inspiring" />
                 </div>
-        </div>
-
-        <canvas id="game"></canvas>
-
-        <!-- Mobile touch controls (shown on small screens) -->
-        <div id="touchControls" class="touch-controls">
-            <div class="left-pad">
-                <button id="touchLeft" class="touch-btn" aria-label="Move left">◀</button>
-                <button id="touchRight" class="touch-btn" aria-label="Move right">▶</button>
             </div>
-            <div class="right-pad">
-                <button id="touchJump" class="touch-btn touch-jump" aria-label="Jump">⬆</button>
-                <button id="touchDash" class="touch-btn touch-dash" aria-label="Dash">⇥</button>
-            </div>
-        </div>
+        </template>
 
         <script src="main.js"></script>
     </body>
